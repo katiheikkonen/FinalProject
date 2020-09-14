@@ -5,10 +5,14 @@ import uuid
 dynamodb = boto3.resource('dynamodb')
 
 #  Funktiolla luodaan käyttäjä sovellukseen POST-toiminnolla. Body =
-#   {"username": " "
-#   firstname': " ",
-#   jne.
-#   }
+# {"body":{
+#     "username": "kpl",
+#   "firstname": "nonnonnoo",
+#   "surname": "uuf",
+#   "email":"jou@jou.joujou",
+#   "city": "kuopio",
+#   "country": "juukelispuukelis"
+# }}
 #  Funktio rakentaa itse uniikin id:n
 
 def create_user(event, context):
