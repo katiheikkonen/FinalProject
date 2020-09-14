@@ -17,7 +17,7 @@ resource "aws_api_gateway_integration" "create_user" {
   http_method             = aws_api_gateway_method.create_user.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "MOCK"  #  aws_lambda_function.createRaceResult.invoke_arn
+  uri                     = module.      #aws_lambda_function./l.invoke_arn
 }
 
 resource "aws_api_gateway_deployment" "create_user" {
