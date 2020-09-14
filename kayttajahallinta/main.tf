@@ -92,11 +92,10 @@ resource "aws_iam_policy" "lambda_post_to_dynamo" {
   "Statement": [
     {
       "Action":"dynamodb:PutItem",
-      "Resource": "*",
+      "Resource": "*"
       "Effect": "Allow"
     }
   ]
 }
 EOF
 }
-
