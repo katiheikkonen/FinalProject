@@ -3,7 +3,7 @@ import boto3
 dynamodb = boto3.resource("dynamodb")
 
 #  Funktiolla poistetaan käyttäjä sovellukseen DELETE-toiminnolla annetun id:n perusteella.
-#  Body = {"id": " "}
+#  Body = {"user_id": " "}
 
 def delete_user(event, context):
     itemid = event['pathParameters']['id']

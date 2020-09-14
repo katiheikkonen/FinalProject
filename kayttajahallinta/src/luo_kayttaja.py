@@ -13,10 +13,10 @@ dynamodb = boto3.resource('dynamodb')
 
 def create_user(event, context):
     json_data = json.loads(event['body'])
-    table = dynamodb.Table("userdata") # vaihdetaan referoimaan luotua taulua
+    table = dynamodb.Table("userdata")
 
     item = {
-        'user_id': uuid.uuid4(),
+        'user_id': str(uuid.uuid4()),
         'username': json_data['username'],
         'firstname': json_data['firstname'],
         'surname': json_data['surname'],

@@ -4,7 +4,7 @@ import json
 dynamodb = boto3.resource('dynamodb')
 
 #  Funtiolla haetaan käyttäjän tiedot sovelluksesta GET-toiminnolla.
-#  Body = {"id": " "}
+#  Body = {"user_id": " "}
 
 def get_user(event, context):
     itemid = event['id']
