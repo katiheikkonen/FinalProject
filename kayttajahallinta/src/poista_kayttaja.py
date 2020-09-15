@@ -6,13 +6,13 @@ dynamodb = boto3.resource("dynamodb")
 #  Body = {"user_id": " "}
 
 def delete_user(event, context):
-    itemid = event['pathParameters']['id']
+    itemid = event['pathParameters']['user_id']
     table = dynamodb.Table('userdata')
 
     table.delete_item(Key={
-        'id': itemid
+        'user_id': itemid
     })
-    print(event)
+
     return {
         'statusCode': 200
     }

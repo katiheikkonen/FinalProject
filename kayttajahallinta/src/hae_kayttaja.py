@@ -7,12 +7,12 @@ dynamodb = boto3.resource('dynamodb')
 #  Body = {"user_id": " "}
 
 def get_user(event, context):
-    itemid = event['id']
+    itemid = event['user_id']
 
     table = dynamodb.Table('userdata')
     response = table.get_item(
         Key={
-            'id': itemid
+            'user_id': itemid
         })
 
     return {
