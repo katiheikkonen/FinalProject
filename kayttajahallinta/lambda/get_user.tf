@@ -13,7 +13,6 @@ resource "aws_lambda_function" "get_user" {
   runtime = "python3.7"
   filename = data.archive_file.hae_kayttaja.output_path
   source_code_hash = data.archive_file.hae_kayttaja.output_base64sha256
-  depends_on = [aws_iam_role_policy_attachment.lambda_get1]
 }
 
 output "get_user_lambda_arn" {

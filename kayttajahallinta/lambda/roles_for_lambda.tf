@@ -1,28 +1,8 @@
 #Rooli "create_user" lambdalle, jotta käyttäjä voi luoda itselleen tilin------------------------------------------------
 resource "aws_iam_role" "role_for_create_user_lambda" {
   name = "iam_for_create_user_lambda"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": "x"
-    }
-  ]
+  assume_role_policy = data.aws_iam_policy_document.put_item.json
 }
-EOF
-}
-
-//#Liitetään POST roolille policy, joka oikeuttaa logata CloudWatchiin
-//resource "aws_iam_role_policy_attachment" "lambda_logs1" {
-//  role       = aws_iam_role.role_for_create_user_lambda.name
-//  policy_arn = aws_iam_policy.lambda_logging.arn
-//}
 
 #Liitetään POST roolille policy, joka oikeuttaa PutItemin "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_post1" {
@@ -34,28 +14,8 @@ resource "aws_iam_role_policy_attachment" "lambda_post1" {
 #Rooli "delete_user" lambdalle, jotta käyttäjä voi poistaa itseltään tilin------------------------------------------------
 resource "aws_iam_role" "role_for_delete_user_lambda" {
   name = "iam_for_delete_user_lambda"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": "y"
-    }
-  ]
+  assume_role_policy = data.aws_iam_policy_document.delete_item.json
 }
-EOF
-}
-
-//#Liitetään DELETE roolille policy, joka oikeuttaa logata CloudWatchiin
-//resource "aws_iam_role_policy_attachment" "lambda_logs2" {
-//  role       = aws_iam_role.role_for_delete_user_lambda.name
-//  policy_arn = aws_iam_policy.lambda_logging.arn
-//}
 
 #Liitetään DELETE roolille policy, joka oikeuttaa DeleteItemin "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_delete1" {
@@ -67,21 +27,7 @@ resource "aws_iam_role_policy_attachment" "lambda_delete1" {
 #Rooli "get_user" lambdalle, jotta käyttäjä voi saada tietonsa------------------------------------------------
 resource "aws_iam_role" "role_for_get_user_lambda" {
   name = "iam_for_get_user_lambda"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": "b"
-    }
-  ]
-}
-EOF
+  assume_role_policy = data.aws_iam_policy_document.get_item.json
 }
 
 //#Liitetään GET roolille policy, joka oikeuttaa logata CloudWatchiin
@@ -100,28 +46,9 @@ resource "aws_iam_role_policy_attachment" "lambda_get1" {
 #Rooli "update_user" lambdalle, jotta käyttäjä voi päivittää tietojaan------------------------------------------------
 resource "aws_iam_role" "role_for_update_user_lambda" {
   name = "iam_for_update_user_lambda"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": "n"
-    }
-  ]
-}
-EOF
+  assume_role_policy = data.aws_iam_policy_document.update_item.json
 }
 
-//#Liitetään UPDATE roolille policy, joka oikeuttaa logata CloudWatchiin
-//resource "aws_iam_role_policy_attachment" "lambda_logs4" {
-//  role       = aws_iam_role.role_for_update_user_lambda.name
-//  policy_arn = aws_iam_policy.lambda_logging.arn
-//}
 
 #Liitetään UPDATE roolille policy, joka oikeuttaa päivittää tietoja "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_put1" {

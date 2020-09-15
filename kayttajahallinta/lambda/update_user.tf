@@ -13,7 +13,6 @@ resource "aws_lambda_function" "update_user" {
   runtime = "python3.7"
   filename = data.archive_file.paivita_kayttaja.output_path
   source_code_hash = data.archive_file.paivita_kayttaja.output_base64sha256
-  depends_on = [aws_iam_role_policy_attachment.lambda_put1]
 }
 
 #Luodaan output arnille:
