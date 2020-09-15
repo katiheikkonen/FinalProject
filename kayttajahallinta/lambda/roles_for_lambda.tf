@@ -18,11 +18,11 @@ resource "aws_iam_role" "role_for_create_user_lambda" {
 EOF
 }
 
-#Liitetään POST roolille policy, joka oikeuttaa logata CloudWatchiin
-resource "aws_iam_role_policy_attachment" "lambda_logs1" {
-  role       = aws_iam_role.role_for_create_user_lambda.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
-}
+//#Liitetään POST roolille policy, joka oikeuttaa logata CloudWatchiin
+//resource "aws_iam_role_policy_attachment" "lambda_logs1" {
+//  role       = aws_iam_role.role_for_create_user_lambda.name
+//  policy_arn = aws_iam_policy.lambda_logging.arn
+//}
 
 #Liitetään POST roolille policy, joka oikeuttaa PutItemin "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_post1" {
@@ -44,18 +44,18 @@ resource "aws_iam_role" "role_for_delete_user_lambda" {
         "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
-      "Sid": "x"
+      "Sid": "y"
     }
   ]
 }
 EOF
 }
 
-#Liitetään DELETE roolille policy, joka oikeuttaa logata CloudWatchiin
-resource "aws_iam_role_policy_attachment" "lambda_logs2" {
-  role       = aws_iam_role.role_for_delete_user_lambda.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
-}
+//#Liitetään DELETE roolille policy, joka oikeuttaa logata CloudWatchiin
+//resource "aws_iam_role_policy_attachment" "lambda_logs2" {
+//  role       = aws_iam_role.role_for_delete_user_lambda.name
+//  policy_arn = aws_iam_policy.lambda_logging.arn
+//}
 
 #Liitetään DELETE roolille policy, joka oikeuttaa DeleteItemin "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_delete1" {
@@ -77,18 +77,18 @@ resource "aws_iam_role" "role_for_get_user_lambda" {
         "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
-      "Sid": "x"
+      "Sid": "b"
     }
   ]
 }
 EOF
 }
 
-#Liitetään GET roolille policy, joka oikeuttaa logata CloudWatchiin
-resource "aws_iam_role_policy_attachment" "lambda_logs3" {
-  role       = aws_iam_role.role_for_get_user_lambda.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
-}
+//#Liitetään GET roolille policy, joka oikeuttaa logata CloudWatchiin
+//resource "aws_iam_role_policy_attachment" "lambda_logs3" {
+//  role       = aws_iam_role.role_for_get_user_lambda.name
+//  policy_arn = aws_iam_policy.lambda_logging.arn
+//}
 
 #Liitetään GET roolille policy, joka oikeuttaa GetItemin "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_get1" {
@@ -110,18 +110,18 @@ resource "aws_iam_role" "role_for_update_user_lambda" {
         "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
-      "Sid": "x"
+      "Sid": "n"
     }
   ]
 }
 EOF
 }
 
-#Liitetään UPDATE roolille policy, joka oikeuttaa logata CloudWatchiin
-resource "aws_iam_role_policy_attachment" "lambda_logs4" {
-  role       = aws_iam_role.role_for_update_user_lambda.name
-  policy_arn = aws_iam_policy.lambda_logging.arn
-}
+//#Liitetään UPDATE roolille policy, joka oikeuttaa logata CloudWatchiin
+//resource "aws_iam_role_policy_attachment" "lambda_logs4" {
+//  role       = aws_iam_role.role_for_update_user_lambda.name
+//  policy_arn = aws_iam_policy.lambda_logging.arn
+//}
 
 #Liitetään UPDATE roolille policy, joka oikeuttaa päivittää tietoja "userdata" dynamo tauluun:
 resource "aws_iam_role_policy_attachment" "lambda_put1" {
