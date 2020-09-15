@@ -9,10 +9,11 @@ data "archive_file" "paivita_kayttaja" {
 resource "aws_lambda_function" "update_user" {
   function_name = "paivita_kayttaja"
   handler = "paivita_kayttaja.update_user"
-  role = aws_iam_role.role_for_create_user_lambda.arn
+  role = aws_iam_role.role_for_update_user_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.paivita_kayttaja.output_path
   source_code_hash = data.archive_file.paivita_kayttaja.output_base64sha256
+  depends_on = [aws_iam_role_policy_attachment.lambda_put1]
 }
 
 #Luodaan output arnille:

@@ -4,14 +4,17 @@ provider "aws" {
   #access_key = ""
   #secret_key = ""
 }
-//
-//module "lambda" {
-//  source = "./lambda"
-//}
+
+module "lambda" {
+  source = "./lambda"
+}
+
 module "api_gateway" {
   source = "./api_gateway"
 }
-//module "dynamo_tables" {
-//  source = "./dynamo_tables"
-//}
+  
+module "dynamo_tables" {
+  source = "./dynamo_tables"
+}
+
 
