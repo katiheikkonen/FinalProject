@@ -34,7 +34,7 @@ resource "aws_iam_policy" "lambda_post_to_dynamo" {
   name        = "lambda_post_to_dynamo"
   description = "IAM policy for WRITE PutItem from a lambda to DynamoDB table UserData"
 
-  policy = data.aws_iam_policy_document.put_item
+  policy = data.aws_iam_policy_document.put_item.json
 }
 
 #Policy document ylempää POST metodia varten
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "put_item" {
     actions = [
       "dynamodb:PutItem"
     ]
-    resources = module.dynamo_table_name.dynamo_table_userdata_arn #referoidaan moduulilla tuotua arnia
+    resources = [module.dynamo_table_name.dynamo_table_userdata_arn] #referoidaan moduulilla tuotua arnia
   }
 }
 
@@ -55,7 +55,7 @@ resource "aws_iam_policy" "lambda_delete_from_dynamo" {
   name        = "lambda_delete_from_dynamo"
   description = "IAM policy for WRITE DeleteItem from a lambda to DynamoDB table UserData"
 
-  policy = data.aws_iam_policy_document.delete_item
+  policy = data.aws_iam_policy_document.delete_item.json
 }
 
 #Policy document ylempää DELETE metodia varten
@@ -66,7 +66,7 @@ data "aws_iam_policy_document" "delete_item" {
     actions = [
       "dynamodb:DeleteItem"
     ]
-    resources = module.dynamo_table_name.dynamo_table_userdata_arn #referoidaan moduulilla tuotua arnia
+    resources = [module.dynamo_table_name.dynamo_table_userdata_arn] #referoidaan moduulilla tuotua arnia
   }
 }
 
@@ -76,7 +76,7 @@ resource "aws_iam_policy" "lambda_get_from_dynamo" {
   name        = "lambda_get_from_dynamo"
   description = "IAM policy for READ GetItem from a lambda to DynamoDB table UserData"
 
-  policy = data.aws_iam_policy_document.get_item
+  policy = data.aws_iam_policy_document.get_item.json
 }
 
 #Policy document ylempää GET metodia varten
@@ -87,7 +87,7 @@ data "aws_iam_policy_document" "get_item" {
     actions = [
       "dynamodb:GetItem"
     ]
-    resources = module.dynamo_table_name.dynamo_table_userdata_arn #referoidaan moduulilla tuotua arnia
+    resources = [module.dynamo_table_name.dynamo_table_userdata_arn] #referoidaan moduulilla tuotua arnia
   }
 }
 
@@ -97,7 +97,7 @@ resource "aws_iam_policy" "lambda_update_dynamo" {
   name        = "lambda_update_dynamo"
   description = "IAM policy for READ GetItem from a lambda to DynamoDB table UserData"
 
-  policy = data.aws_iam_policy_document.update_item
+  policy = data.aws_iam_policy_document.update_item.json
 }
 
 #Policy document ylempää UPDATE/ PUT metodia varten
@@ -109,6 +109,6 @@ data "aws_iam_policy_document" "update_item" {
       "dynamodb:GetItem",
       "dynamodb:UpdateItem"
     ]
-    resources = module.dynamo_table_name.dynamo_table_userdata_arn #referoidaan moduulilla tuotua arnia
+    resources = [module.dynamo_table_name.dynamo_table_userdata_arn] #referoidaan moduulilla tuotua arnia
   }
 }

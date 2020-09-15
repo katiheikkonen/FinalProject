@@ -118,13 +118,13 @@ EOF
 }
 
 #Liitetään UPDATE roolille policy, joka oikeuttaa logata CloudWatchiin
-resource "aws_iam_role_policy_attachment" "lambda_logs3" {
+resource "aws_iam_role_policy_attachment" "lambda_logs4" {
   role       = aws_iam_role.role_for_update_user_lambda.name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
 #Liitetään UPDATE roolille policy, joka oikeuttaa päivittää tietoja "userdata" dynamo tauluun:
-resource "aws_iam_role_policy_attachment" "lambda_get1" {
+resource "aws_iam_role_policy_attachment" "lambda_put1" {
   role       = aws_iam_role.role_for_update_user_lambda.name
   policy_arn = aws_iam_policy.lambda_update_dynamo.arn
 }
