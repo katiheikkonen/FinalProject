@@ -24,6 +24,6 @@ output "create_user_lambda_name" {
   value = aws_lambda_function.create_user.function_name
 }
 
-output "create_user_lambda_invokearn" {
+output "create_user_lambda_invoke_arn" {
   value = aws_lambda_function.create_user.invoke_arn
 }

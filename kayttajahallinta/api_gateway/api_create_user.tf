@@ -26,7 +26,7 @@ resource "aws_api_gateway_integration" "create_user" {
   http_method             = aws_api_gateway_method.create_user.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY" #  This type of integration lets an API method be integrated with the Lambda function invocation action
-  uri                     = module.lambda_outputs.create_user_lambda_invokearn #  API gateway invocation URI Lambda-funktiolle
+  uri                     = module.lambda_outputs.create_user_lambda_invoke_arn #  API gateway invocation URI Lambda-funktiolle
 }
 
 #  Annetaan API Gatewaylle lupa create_user Lambdan käynnistämiseen
@@ -36,5 +36,5 @@ resource "aws_lambda_permission" "create_user" {
   function_name = module.lambda_outputs.create_user_lambda_name
   principal = "apigateway.amazonaws.com"
 
-  source_arn = aws_api_gateway_rest_api.mystocksapi.execution_arn
+  source_arn = (aws_api_gateway_rest_api.mystocksapi.execution_arn) #"arn:aws:execute-api:eu-west-2:821383200340:tsefm0umhk/*/POST/userdata"
 }

@@ -33,7 +33,7 @@ resource "aws_api_gateway_integration" "delete_user" {
   http_method             = aws_api_gateway_method.delete_user.http_method
   integration_http_method = "DELETE"
   type                    = "MOCK"#"AWS_PROXY" #  This type of integration lets an API method be integrated with the Lambda function invocation action
-  #uri                     = module.lambda.delete_user_lambda_invokearn #  API gateway invocation URI Lambda-funktiolle
+  #uri                     = module.lambda.delete_user_lambda_invoke_arn #  API gateway invocation URI Lambda-funktiolle
 }
 
 #  Annetaan API Gatewaylle lupa delete_user Lambdan käynnistämiseen

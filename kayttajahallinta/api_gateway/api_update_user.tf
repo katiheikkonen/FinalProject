@@ -33,7 +33,7 @@ resource "aws_api_gateway_integration" "update_user" {
   http_method             = aws_api_gateway_method.update_user.http_method
   integration_http_method = "PUT"
   type                    = "MOCK"#"AWS_PROXY" #  This type of integration lets an API method be integrated with the Lambda function invocation action
-  #uri                     = module.lambda.create_user_lambda_invokearn #  API gateway invocation URI Lambda-funktiolle
+  #uri                     = module.lambda.create_user_lambda_invoke_arn #  API gateway invocation URI Lambda-funktiolle
 }
 
 #  Annetaan API Gatewaylle lupa create_user Lambdan käynnistämiseen
