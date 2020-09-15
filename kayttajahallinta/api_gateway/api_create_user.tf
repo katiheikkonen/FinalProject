@@ -20,16 +20,6 @@ resource "aws_api_gateway_method" "create_user" {
   authorization = "NONE"
 }
 
-#  Integroidaan API Gateway create_user Lambda-funktion kanssa
-resource "aws_api_gateway_integration" "create_user" {
-  rest_api_id             = aws_api_gateway_rest_api.mystocksapi.id
-  resource_id             = aws_api_gateway_resource.create_user.id
-  http_method             = aws_api_gateway_method.create_user.http_method
-//  integration_http_method = "POST"
-  type                    = "AWS_PROXY"
-  uri                     = module.lambda.create_user_lambda_arn   #pyydetään invoke_arn, onko sama kuin arn?
-}
-
 #  Luodaan API Gatewaylle deployment dev ympäristöön metodin kokeilua varten
 resource "aws_api_gateway_deployment" "create_user" {
   depends_on = [
@@ -41,6 +31,16 @@ resource "aws_api_gateway_deployment" "create_user" {
   lifecycle {
     create_before_destroy = true
   }
+}
+
+#  Integroidaan API Gateway create_user Lambda-funktion kanssa
+resource "aws_api_gateway_integration" "create_user" {
+  rest_api_id             = aws_api_gateway_rest_api.mystocksapi.id
+  resource_id             = aws_api_gateway_resource.create_user.id
+  http_method             = aws_api_gateway_method.create_user.http_method
+//  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_api_gateway_deployment.create_user.invoke_url #  API gateway invocation URI Lambda-funktiolle
 }
 
 #  Annetaan API Gatewaylle lupa create_user Lambdan käynnistämiseen
