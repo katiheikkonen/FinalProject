@@ -17,10 +17,10 @@ resource "aws_lambda_function" "update_user" {
 
 #Luodaan output arnille:
 output "update_user_lambda_arn" {
-  value = aws_lambda_function.create_user.arn
+  value = aws_lambda_function.update_user.arn
 }
 
 #Luodaan output lambdan nimelle:
 output "update_user_lambda_name" {
-  value = aws_lambda_function.create_user.function_name
+  value = aws_lambda_function.update_user.function_name
 }

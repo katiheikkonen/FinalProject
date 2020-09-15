@@ -6,7 +6,7 @@ provider "aws" {
 }
 
 module "lambda" {
-  source = "./lambda"
+  source = "./lambda/"
 }
 
 module "api_gateway" {
