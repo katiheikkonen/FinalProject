@@ -8,3 +8,7 @@ provider "aws" {
 module "lambda_functions" {
   source = "./lambda"
 }
+
+module "dynamo_tables" {
+  source = "./dynamo_tables"
+}
