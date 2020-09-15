@@ -40,7 +40,7 @@ resource "aws_api_gateway_integration" "update_user" {
 resource "aws_lambda_permission" "update_user" {
   statement_id = "AllowExecutionFromAPIGateway"
   action = "lambda:InvokeFunction"
-  function_name = module.lambda.update_user_lambda_name
+  function_name = module.lambda_outputs.update_user_lambda_name
   principal = "apigateway.amazonaws.com"
 
   source_arn = aws_api_gateway_rest_api.mystocksapi.execution_arn
