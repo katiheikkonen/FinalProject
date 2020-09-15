@@ -22,3 +22,7 @@ output "delete_user_lambda_arn" {
 output "delete_user_lambda_name" {
   value = aws_lambda_function.delete_user.function_name
 }
+
+output "delete_user_lambda_invokearn" {
+  value = aws_lambda_function.create_user.invoke_arn
+}
