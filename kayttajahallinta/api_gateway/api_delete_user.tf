@@ -40,7 +40,7 @@ resource "aws_api_gateway_integration" "delete_user" {
 resource "aws_lambda_permission" "delete_user" {
   statement_id = "AllowExecutionFromAPIGateway"
   action = "lambda:InvokeFunction"
-  function_name = module.lambda.delete_user_lambda_name
+  function_name = module.lambda_outputs.delete_user_lambda_name
   principal = "apigateway.amazonaws.com"
 
   source_arn = aws_api_gateway_rest_api.mystocksapi.execution_arn
