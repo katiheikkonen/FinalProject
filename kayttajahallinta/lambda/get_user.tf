@@ -22,3 +22,6 @@ output "get_user_lambda_arn" {
 output "get_user_lambda_name" {
   value = aws_lambda_function.get_user.function_name
 }
+output "get_user_lambda_invoke_arn" {
+  value = aws_lambda_function.get_user.invoke_arn
+}

@@ -24,3 +24,6 @@ output "update_user_lambda_arn" {
 output "update_user_lambda_name" {
   value = aws_lambda_function.update_user.function_name
 }
+output "update_user_lambda_invoke_arn" {
+  value = aws_lambda_function.update_user.function_name
+}

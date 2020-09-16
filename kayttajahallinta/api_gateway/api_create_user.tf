@@ -36,5 +36,5 @@ resource "aws_lambda_permission" "create_user" {
   function_name = aws_lambda_function.create_user.function_name
   principal = "apigateway.amazonaws.com"
 
-  source_arn = aws_api_gateway_rest_api.mystocksapi.execution_arn
+  source_arn = (aws_api_gateway_rest_api.mystocksapi.execution_arn) #"arn:aws:execute-api:eu-west-2:821383200340:tsefm0umhk/*/POST/userdata"
 }
