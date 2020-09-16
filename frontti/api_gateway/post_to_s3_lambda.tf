@@ -16,14 +16,14 @@ resource "aws_lambda_function" "post_to_s3" {
 }
 
 #Luodaan outputteja Lambdalle (arn, name ja invoke_arn)
-output "create_user_lambda_arn" {
+output "post_to_s3_lambda_arn" {
   value = aws_lambda_function.post_to_s3.arn
 }
 
-output "create_user_lambda_name" {
+output "post_to_s3_lambda_name" {
   value = aws_lambda_function.post_to_s3.function_name
 }
 
-output "create_user_lambda_invoke_arn" {
+output "post_to_s3_lambda_invoke_arn" {
   value = aws_lambda_function.post_to_s3.invoke_arn
 }

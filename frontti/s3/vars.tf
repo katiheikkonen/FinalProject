@@ -1,3 +1,3 @@
 variable "s3_bucket_name" {
-  default = "customer_review_loppuprojekti_123"
+  default = "customer-review-loppuprojekti-123"
 }

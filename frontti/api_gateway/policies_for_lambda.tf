@@ -1,10 +1,10 @@
 #Tuodaan moduuli dynamo_tables, jotta voidaan referoida politikkoihin taulun arn:
 module "s3_moduuli" {
-  source = "../s3/"
+  source = "../s3"
 }
 
 #"lambda_post_to_s3" mahdollistaa POST metodin S3 ämpäriin "customer_reviews_loppuprojekti_123" ja oikeuttaa CloudWatch logien tekemisen:
-resource "aws_iam_policy" "lambda_post_to_dynamo" {
+resource "aws_iam_policy" "lambda_post_to_s3" {
   name        = "lambda_post_to_s3_policy"
   description = "IAM policy for WRITE PostItem from a lambda to S3 'customer_reviews_.."
 
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "post_to_s3" {
     sid = "1as"
     effect = "Allow"
     actions = [
-      "dynamodb:PutItem",
+      "s3:PutObject",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"

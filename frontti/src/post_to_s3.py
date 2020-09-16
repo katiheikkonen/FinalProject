@@ -6,7 +6,7 @@ s3 = boto3.resource("s3")
 def from_api_to_s3(event, context):
 
     #data = json.loads(event['body'])
-    bucket_name = "customer_review_loppuprojekti_123"
+    bucket_name = "customer-review-loppuprojekti-123"
 
     sisalto = json.loads(event['body'])
     tiedosto = str(uuid.uuid1())
