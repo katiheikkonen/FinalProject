@@ -8,9 +8,9 @@ provider "aws" {
 module "api_gateway" {
   source = "./api_gateway/"
 }
-module "lambda" {
-  source = "./lambda/"
-}
+#module "lambda" {
+#  source = "./lambda/"
+#}
 module "s3" {
   source = "./s3/"
 }
