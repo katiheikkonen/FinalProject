@@ -7,9 +7,7 @@ resource "aws_api_gateway_rest_api" "SendReviewAPI" {
 
 #  LUODAAN API GATEWAY RESOURCE
 
-
-
-//#  Tuodaan lambda-moduuli CRUD-toimintojen käyttöön
+//#  Tuodaan lambda-moduuli POST-toiminnon käyttöön
 //module "lambda_outputs" {
 //source  = "../lambda"
 //}
