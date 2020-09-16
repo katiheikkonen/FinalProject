@@ -9,11 +9,10 @@ data "archive_file" "luo_kayttaja" {
 resource "aws_lambda_function" "create_user" {
   function_name = "luo_kayttaja"
   handler = "luo_kayttaja.create_user"
-  role = aws_iam_role.role_for_create_user_lambda.arn
+  role = "arn:aws:iam::821383200340:role/chekki8-mikko-lambda" #aws_iam_role.role_for_create_user_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.luo_kayttaja.output_path
   source_code_hash = data.archive_file.luo_kayttaja.output_base64sha256
-  depends_on = [data.aws_iam_policy_document.put_item]
 }
 
 output "create_user_lambda_arn" {
