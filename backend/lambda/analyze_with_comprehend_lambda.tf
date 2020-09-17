@@ -15,11 +15,7 @@ resource "aws_lambda_function" "analyze_with_comprehend" {
   source_code_hash = data.archive_file.analyze_with_comprehend.output_base64sha256
 }
 
-#Luodaan outputteja Lambdalle (arn ja name)
+#Luodaan Lambdalle output arn
 output "analyze_with_comprehend_arn" {
   value = aws_lambda_function.analyze_with_comprehend.arn
-}
-
-output "analyze_with_comprehend_name" {
-  value = aws_lambda_function.analyze_with_comprehend.function_name
 }
