@@ -5,6 +5,12 @@ provider "aws" {
   #secret_key = ""
 }
 
-module "dynamodb" {
-  source = "./dynamodb/"
+module "api_gateway" {
+  source = "api_gateway and lambda/"
+}
+module "lambda" {
+  source = "./lambda/"
+}
+module "s3" {
+  source = "./s3/"
 }
