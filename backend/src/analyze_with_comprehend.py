@@ -1,3 +1,5 @@
+import json
+
 #  S3 laukaisee tämän Lambdan ja se lähettää asiakaspalautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-tyäkalun kautta
 import boto3
 
@@ -17,6 +19,26 @@ def sentimental_analysis(event, context):
     # paragraph = str(file['Body'].read())
 
     # Extracting sentiments using comprehend
-    sentiment = comprehend.detect_sentiment(Text=message, LanguageCode="en")
+    reply = comprehend.detect_sentiment(Text=message, LanguageCode="en")
 
-    return sentiment
+    #Poimitaan Comprehendista tulleesta datasta halutut datakentät:
+    sentiment = reply['Sentiment']
+    positive = reply['SentimentScore']['Positive']
+    negative = reply['SentimentScore']['Negative']
+    neutral = reply['SentimentScore']['Neutral']
+    mixed = reply['SentimentScore']['Mixed']
+    time = mixed = reply['ResponseMetadata']['HTTPHeaders']['date']
+
+    # + potentiaalista debugausta varten retry-attemps kenttä:
+    retry_attemps = reply['ResponseMetadata']['RetryAttempts']
+
+    analysis = {
+        "sentiment":sentiment,
+        "positive": positive,
+        "negative": negative,
+        "neutral": neutral,
+        "mixed":mixed,
+        "time":time
+    }
+
+    return {"body":json.dumps(analysis)}
