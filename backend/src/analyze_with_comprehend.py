@@ -1,4 +1,5 @@
 import json
+import uuid
 
 #  S3 laukaisee tämän Lambdan ja se lähettää asiakaspalautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-tyäkalun kautta
 import boto3
@@ -24,11 +25,11 @@ def sentimental_analysis(event, context):
 
     #Poimitaan Comprehendista tulleesta datasta halutut datakentät:
     sentiment = reply['Sentiment']
-    positive = reply['SentimentScore']['Positive']
-    negative = reply['SentimentScore']['Negative']
-    neutral = reply['SentimentScore']['Neutral']
-    mixed = reply['SentimentScore']['Mixed']
-    time = mixed = reply['ResponseMetadata']['HTTPHeaders']['date']
+    positive = str(reply['SentimentScore']['Positive'])
+    negative = str(reply['SentimentScore']['Negative'])
+    neutral = str(reply['SentimentScore']['Neutral'])
+    mixed = str(reply['SentimentScore']['Mixed'])
+    time = str(reply['ResponseMetadata']['HTTPHeaders']['date'])
 
     # + potentiaalista debugausta varten retry-attemps kenttä:
     retry_attemps = reply['ResponseMetadata']['RetryAttempts']
@@ -39,6 +40,7 @@ def sentimental_analysis(event, context):
 
     #Luodaan item/ Rivi joka tallennetaan Dynamoon:
     item = {
+        "id":uuid.uuid4(),
         "sentiment":sentiment,
         "positive": positive,
         "negative": negative,

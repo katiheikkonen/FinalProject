@@ -1,28 +1,13 @@
 
-resource "aws_iam_role" "role_for_lambda_analyze_with_comprehend" {
-  name = "iam_for_analyze_with_comprehend_lambda"
-   #data.aws_iam_policy_document.analyze_with_comprehend.json
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": "1"
-    }
-  ]
+resource "aws_iam_role" "role_for_lambda_analyze_with_comprehend_plus" {
+  name = "iam_for_analyze_with_comprehend_lambda_plus"
+  #data.aws_iam_policy_document.analyze_with_comprehend.json
+  assume_role_policy = data.aws_iam_policy_document.analyze_getitem_putitem_logs.json
 }
-EOF
-}
-
 
 resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attachment" {
-  role       = aws_iam_role.role_for_lambda_analyze_with_comprehend.name
-  policy_arn = aws_iam_policy.lambda_analyze_with_comprehend.arn
+  role       = aws_iam_role.role_for_lambda_analyze_with_comprehend_plus.name
+  policy_arn = aws_iam_policy.lambda_comprehend_s3_dynamo_logs.arn
 }
 
 
