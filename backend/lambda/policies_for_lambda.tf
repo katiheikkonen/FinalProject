@@ -17,6 +17,7 @@ data "aws_iam_policy_document" "s3_get_and_cw_log" {
     effect = "Allow"
     actions = [
       "s3:GetObject",
+      "dynamodb:PutItem",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
