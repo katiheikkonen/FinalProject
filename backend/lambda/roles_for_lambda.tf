@@ -34,8 +34,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = module.s3_moduulit.customer_reviews_s3_bucket_id
   lambda_function {
     lambda_function_arn = aws_lambda_function.dummy_lambda_func.arn
-    events = ["s3:ObjectCreated:*"
-    ]
+    events = ["s3:POST"]
     #filter_prefix       = "AWSLogs/"
     #filter_suffix       = ".log"
   }
