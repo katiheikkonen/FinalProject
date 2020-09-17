@@ -9,11 +9,11 @@ resource "aws_iam_policy" "lambda_post_to_s3" {
   path = "/"
   description = "IAM policy for WRITE PostItem from a lambda to S3 'customer_reviews_.."
 
-  policy = data.aws_iam_policy_document.postaa_to_s3.json
+  policy = data.aws_iam_policy_document.post_to_s3.json
 }
 
 #Policy document ylempää POST metodia varten:
-data "aws_iam_policy_document" "postaa_to_s3" {
+data "aws_iam_policy_document" "post_to_s3" {
   statement {
     sid = "123"
     effect = "Allow"

@@ -1,9 +1,9 @@
-#Tässä pitäisi tuoda s3_moduuli referoimista varten
+#Tuodaan s3_moduuli referoimista varten
 module "s3_moduuli" {
   source = "../../frontend/s3/"
 }
 
-# policy mahdollistaa GET-metodin S3 ämpäriin "customer_reviews_loppuprojekti_123",
+# Policy mahdollistaa GET-metodin S3 ämpäriin "customer_reviews_loppuprojekti_123",
 # Amazon Comprehendin käytön sekä CloudWatch logien tekemisen
 resource "aws_iam_policy" "lambda_analyze_with_comprehend" {
   name        = "lambda_analyze_with_comprehend_policy"
@@ -18,11 +18,20 @@ data "aws_iam_policy_document" "analyze_with_comprehend" {
     sid = "1as"
     effect = "Allow"
     actions = [
-      #"s3:GetObject",
+      "s3:GetObject",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:*:*:*"]  # lisää vielä Bucket_arn/*
+    resources = ["${module.s3_moduuli.customer_reviews_s3_bucket_arn}/*","arn:aws:logs:*:*:*",
+    ]
+  }
+  statement {
+    sid = "2as"
+    effect = "Allow"
+    actions = [
+      "comprehend:DetectSentiment"
+    ]
+    resources = ["*"]
   }
 }
