@@ -1,6 +1,6 @@
 #Tässä pitäisi tuoda s3_moduuli referoimista varten
 module "s3_moduuli" {
-  source = "../s3"
+  source = "../../frontend/s3/"
 }
 
 #"lambda_post_to_s3" mahdollistaa POST metodin S3 ämpäriin "customer_reviews_loppuprojekti_123" ja oikeuttaa CloudWatch logien tekemisen:

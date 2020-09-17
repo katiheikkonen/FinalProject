@@ -1,16 +1,15 @@
 import boto3
-import uuid
 import json
+import uuid
 s3 = boto3.resource("s3")
 
-def from_api_to_s3(event, context):
-    data = json.loads(event['body'])
 
-    bucket_name = "customer-review-loppuprojekti-123"
+def dummy(event, context):
+    bucket_name = "mikko-cloudtrail-logs"
 
-    sisalto = data
+    sisalto = "moi"
     tiedosto = str(uuid.uuid1())
-    file_name = f"{tiedosto}.json"
+    file_name = f"{tiedosto}.txt"
     s3_path = file_name
 
     s3.Bucket(bucket_name).put_object(Key=s3_path, Body=json.dumps(sisalto))

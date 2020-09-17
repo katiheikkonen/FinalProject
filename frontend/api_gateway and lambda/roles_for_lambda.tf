@@ -23,3 +23,7 @@ resource "aws_iam_role_policy_attachment" "lambda_post_to_s3_attachment" {
   role       = aws_iam_role.role_for_post_to_s3_lambda.name
   policy_arn = aws_iam_policy.lambda_post_to_s3.arn
 }
+
+output "role_for_dummy" {
+  value = aws_iam_role.role_for_post_to_s3_lambda.arn
+}
