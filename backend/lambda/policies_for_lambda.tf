@@ -1,6 +1,6 @@
 #Tuodaan s3_moduuli referoimista varten
 module "s3_moduuli" {
-  source = "..\/s3/"
+  source = "../s3/"
 }
 
 # Policy mahdollistaa GET-metodin S3 ämpäriin "customer_reviews_loppuprojekti_123",
