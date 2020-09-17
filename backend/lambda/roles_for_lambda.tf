@@ -25,10 +25,6 @@ resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attach
   policy_arn = aws_iam_policy.lambda_analyze_with_comprehend.arn
 }
 
-resource "aws_iam_role_policy_attachment" "s3_get_and_cw_log_attachment" {
-  role       = aws_iam_role.role_for_lambda_analyze_with_comprehend.name
-  policy_arn = aws_iam_policy.s3_get_and_cw_log.arn
-}
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = module.s3_moduulit.customer_reviews_s3_bucket_id
