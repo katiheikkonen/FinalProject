@@ -20,6 +20,6 @@ output "analyze_with_comprehend_arn" {
   value = aws_lambda_function.analyze_with_comprehend.arn
 }
 
-output "post_to_s3_lambda_name" {
+output "analyze_with_comprehend_name" {
   value = aws_lambda_function.analyze_with_comprehend.function_name
 }

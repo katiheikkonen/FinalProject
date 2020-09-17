@@ -1,5 +1,5 @@
 #Tuodaan s3_moduuli referoimista varten
-module "s3_moduuli" {
+module "s3_moduulit" {
   source = "../s3/"
 }
 
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "analyze_with_comprehend" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["${module.s3_moduuli.customer_reviews_s3_bucket_arn}/*","arn:aws:logs:*:*:*",
+    resources = ["${module.s3_moduulit.customer_reviews_s3_bucket_arn}/*","arn:aws:logs:*:*:*",
     ]
   }
   statement {
