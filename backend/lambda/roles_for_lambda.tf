@@ -1,13 +1,33 @@
-#Rooli "post_to_s3" lambdalle, jotta Lambda voi kirjoittaa S3 buckettiin ja logata logeja CloudWatchiin:
+
 resource "aws_iam_role" "role_for_lambda_analyze_with_comprehend" {
   name = "iam_for_analyze_with_comprehend_lambda"
-  assume_role_policy = data.aws_iam_policy_document.analyze_with_comprehend.json
+   #data.aws_iam_policy_document.analyze_with_comprehend.json
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": "1"
+    }
+  ]
+}
+EOF
 }
 
-#Liitetään POST_TO_S3 roolille policy, joka oikeuttaa PutItemin S3 ämpäriin:
+
 resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attachment" {
   role       = aws_iam_role.role_for_lambda_analyze_with_comprehend.name
   policy_arn = aws_iam_policy.lambda_analyze_with_comprehend.arn
+}
+
+resource "aws_iam_role_policy_attachment" "s3_get_and_cw_log_attachment" {
+  role       = aws_iam_role.role_for_lambda_analyze_with_comprehend.name
+  policy_arn = aws_iam_policy.s3_get_and_cw_log.arn
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
