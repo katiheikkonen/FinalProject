@@ -18,7 +18,7 @@ def from_api_to_s3(event, context):
 
     response= {
         'statusCode': 200,
-        'body': json.dumps('file is created in: ' + bucket_name+ "/" + s3_path)
+        'body': json.dumps('file is created in: ' + bucket_name + "/" + s3_path)
     }
 
     return response
