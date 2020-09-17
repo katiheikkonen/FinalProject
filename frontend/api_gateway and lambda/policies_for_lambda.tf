@@ -22,6 +22,7 @@ data "aws_iam_policy_document" "post_to_s3" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = [module.s3_moduuli.customer_reviews_s3_bucket_arn, "arn:aws:logs:*:*:*"] #referoidaan moduulilla tuotua arnia
+    resources = ["arn:aws:logs:*:*:*", "${module.s3_moduuli.customer_reviews_s3_bucket_arn}/*",
+    ] #referoidaan moduulilla tuotua arnia
   }
 }
