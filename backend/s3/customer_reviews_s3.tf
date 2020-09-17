@@ -1,5 +1,5 @@
 module "dummy_arn" {
-  source = "../lambda2/"
+  source = "../lambda/"
 }
 
 resource "aws_s3_bucket" "customer_reviews_s3" {
@@ -22,7 +22,6 @@ output "customer_reviews_s3_bucket_id" {
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = aws_s3_bucket.customer_reviews_s3.id
-
   lambda_function {
     lambda_function_arn = module.dummy_arn.lambda_dummy_arn
     events = ["s3:OdjectCreated:*"

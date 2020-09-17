@@ -9,7 +9,7 @@ module "dynamo_db" {
   source = "./dynamodb/"
 }
 module "lambda" {
-  source = "./lambda2/"
+  source = "./lambda/"
 }
 
 module "s3" {
