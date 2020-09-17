@@ -1,29 +1,25 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
-data "archive_file" "sentimental_analysis" {
+data "archive_file" "analyze_with_comprehend" {
   type = "zip"
-  source_file = "src/sentimental_analysis.py"
-  output_path = "src/sentimental_analysis.zip"
+  source_file = "src/analyze_with_comprehend.py"
+  output_path = "src/analyze_with_comprehend.zip"
 }
 
 #Lambda funktio:
 resource "aws_lambda_function" "analyze_with_comprehend" {
-  function_name = "sentimental_analysis"
-  handler = "analyze_with_comprehend.lambda_handler" # nämä vielä vaihtoon
-  role = aws_iam_role.role_for_post_to_s3_lambda.arn
+  function_name = "analyze_with_comprehend"
+  handler = "analyze_with_comprehend.sentimental_analysis"
+  role = aws_iam_role.role_for_lambda_analyze_with_comprehend.arn
   runtime = "python3.7"
-  filename = data.archive_file.post_to_s3.output_path
-  source_code_hash = data.archive_file.post_to_s3.output_base64sha256
+  filename = data.archive_file.analyze_with_comprehend.output_path
+  source_code_hash = data.archive_file.analyze_with_comprehend.output_base64sha256
 }
 
-#Luodaan outputteja Lambdalle (arn, name ja invoke_arn)
-output "post_to_s3_lambda_arn" {
-  value = aws_lambda_function.post_to_s3.arn
+#Luodaan outputteja Lambdalle (arn ja name)
+output "analyze_with_comprehend_arn" {
+  value = aws_lambda_function.analyze_with_comprehend.arn
 }
 
 output "post_to_s3_lambda_name" {
-  value = aws_lambda_function.post_to_s3.function_name
-}
-
-output "post_to_s3_lambda_invoke_arn" {
-  value = aws_lambda_function.post_to_s3.invoke_arn
+  value = aws_lambda_function.analyze_with_comprehend.function_name
 }

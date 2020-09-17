@@ -4,8 +4,8 @@ import boto3
 #s3 = boto3.client("s3")
 comprehend = boto3.client("comprehend")
 
-def lambda_handler(event, context):
-    paragraph = "The end of the cord broke off in my phone after the 4th use." \
+def sentimental_analysis(event, context):
+    message = "The end of the cord broke off in my phone after the 4th use." \
     "Thought it might be a just a defective plug, but I looked at recent reviews and others are having same issues."\
      "I am sending the cords back and buy different brand."
 
@@ -17,6 +17,6 @@ def lambda_handler(event, context):
     # paragraph = str(file['Body'].read())
 
     # Extracting sentiments using comprehend
-    sentiment = comprehend.detect_sentiment(Text=paragraph, LanguageCode="en")
+    sentiment = comprehend.detect_sentiment(Text=message, LanguageCode="en")
 
     return sentiment
