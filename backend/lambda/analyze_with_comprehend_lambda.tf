@@ -1,14 +1,14 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
-data "archive_file" "analyze_with_comprehend" {
+data "archive_file" "sentimental_analysis" {
   type = "zip"
-  source_file = "src/analyze_with_comprehend.py"
-  output_path = "src/analyze_with_comprehend.zip"
+  source_file = "src/sentimental_analysis.py"
+  output_path = "src/sentimental_analysis.zip"
 }
 
 #Lambda funktio:
 resource "aws_lambda_function" "analyze_with_comprehend" {
-  function_name = "analyze_with_comprehend"
-  handler = "analyze_with_comprehend.analyze_with_comprehend"
+  function_name = "sentimental_analysis"
+  handler = "analyze_with_comprehend.lambda_handler" # nämä vielä vaihtoon
   role = aws_iam_role.role_for_post_to_s3_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.post_to_s3.output_path
