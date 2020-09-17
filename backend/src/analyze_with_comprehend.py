@@ -5,6 +5,7 @@ import boto3
 
 #s3 = boto3.client("s3")
 comprehend = boto3.client("comprehend")
+dynamodb = boto3.resource('dynamodb')
 
 def sentimental_analysis(event, context):
     message = "The end of the cord broke off in my phone after the 4th use." \
@@ -32,7 +33,12 @@ def sentimental_analysis(event, context):
     # + potentiaalista debugausta varten retry-attemps kenttä:
     retry_attemps = reply['ResponseMetadata']['RetryAttempts']
 
-    analysis = {
+
+    #Tallennetaan sortattu Comprehend data DynamoDB tauluun:
+    table = dynamodb.Table("sentiment_analysis_data") #Nimi kovakoodattuna
+
+    #Luodaan item/ Rivi joka tallennetaan Dynamoon:
+    item = {
         "sentiment":sentiment,
         "positive": positive,
         "negative": negative,
@@ -40,5 +46,11 @@ def sentimental_analysis(event, context):
         "mixed":mixed,
         "time":time
     }
+    #Tallennus:
+    table.put_item(Item=item)
 
-    return {"body":json.dumps(analysis)}
+    #Luodaan Response, jonka lambda näyttää suorituksen jälkeen:
+    response = {
+        "statusCode": 200,
+        "body":json.dumps(item)}
+    return response
