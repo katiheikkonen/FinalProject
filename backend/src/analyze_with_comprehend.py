@@ -1,7 +1,8 @@
 import json
 import uuid
 
-#  S3 laukaisee tämän Lambdan ja se lähettää asiakaspalautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-tyäkalun kautta
+#  S3 laukaisee tämän Lambdan
+#  Lambda lähettää saadun palautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-työkalun kautta
 import boto3
 
 #s3 = boto3.client("s3")
