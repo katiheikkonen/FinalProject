@@ -1,13 +1,7 @@
 #Tässä pitäisi tuoda s3_moduuli referoimista varten
-<<<<<<< HEAD
 module "s3_moduuli" {
   source = "../../frontend/s3/"
 }
-=======
-//module "s3_moduuli" {
-//  source = "../frontend/s3/"
-//
->>>>>>> refs/remotes/origin/master
 
 # policy mahdollistaa GET-metodin S3 ämpäriin "customer_reviews_loppuprojekti_123",
 # Amazon Comprehendin käytön sekä CloudWatch logien tekemisen
