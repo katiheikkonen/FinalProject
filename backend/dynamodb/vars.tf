@@ -1,3 +1,3 @@
 variable "dynamodb_table_name" {
-  default = "sentiment_analysis_data"
+  default = "sentiment_data_analysis"
 }
