@@ -20,6 +20,7 @@ data "aws_iam_policy_document" "analyze_getitem_putitem_logs" {
     effect = "Allow"
     actions = [
       "s3:GetObject",
+      "s3:ListBucket",
       "dynamodb:PutItem",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
@@ -27,6 +28,7 @@ data "aws_iam_policy_document" "analyze_getitem_putitem_logs" {
     ]
     resources = [
       "${module.s3_moduulit.customer_reviews_s3_bucket_arn}/*",
+      module.s3_moduulit.customer_reviews_s3_bucket_arn,
       module.dynamodb_arn.dynamo_table_sentiment_analysis_data_arn,
       "arn:aws:logs:*:*:*",
     ]

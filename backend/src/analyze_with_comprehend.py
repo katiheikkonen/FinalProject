@@ -5,55 +5,56 @@ import uuid
 #  Lambda lähettää saadun palautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-työkalun kautta
 import boto3
 
-#s3 = boto3.client("s3")
+# s3 = boto3.client("s3")
 comprehend = boto3.client("comprehend")
 dynamodb = boto3.resource('dynamodb')
+s3 = boto3.resource('s3')
+
 
 def sentimental_analysis(event, context):
-    message = "The end of the cord broke off in my phone after the 4th use." \
-    "Thought it might be a just a defective plug, but I looked at recent reviews and others are having same issues."\
-     "I am sending the cords back and buy different brand."
+    # Poimitaan S3sta tulevasta eventistä..
+    s3_trigger = event['Records']
+    # Uuden tiedoston nimi, sekä
+    s3_filename = s3_trigger[0]['s3']['object']['key']
+    # bucketin nimi
+    s3_bucket_name = s3_trigger[0]['s3']['bucket']['name']
 
-    # paragraph-kohtaan vielä muutos, että haetaan asiakaspalaute s3:sta, alla yksi esimerkki
+    # haettu objekti:
+    obj = s3.Object(s3_bucket_name, s3_filename)
+    # tiedoston sisältä
+    m_body = obj.get()['Body']._raw_stream.readline()
+    viesti = json.loads(m_body)
 
-    # bucket = "bucket-name"
-    # key = "filename.txt"
-    # file = s3.get_object(Bucket=bucket, Key=key)
-    # paragraph = str(file['Body'].read())
+    # sisällön message kenttä:
+    message = viesti['message']
+    print(message)
 
     # Extracting sentiments using comprehend
     reply = comprehend.detect_sentiment(Text=message, LanguageCode="en")
 
-    #Poimitaan Comprehendista tulleesta datasta halutut datakentät:
-    sentiment = reply['Sentiment']
-    positive = str(reply['SentimentScore']['Positive'])
-    negative = str(reply['SentimentScore']['Negative'])
-    neutral = str(reply['SentimentScore']['Neutral'])
-    mixed = str(reply['SentimentScore']['Mixed'])
-    time = str(reply['ResponseMetadata']['HTTPHeaders']['date'])
-
     # + potentiaalista debugausta varten retry-attemps kenttä:
     retry_attemps = reply['ResponseMetadata']['RetryAttempts']
 
+    # Tallennetaan sortattu Comprehend data DynamoDB tauluun:
+    table = dynamodb.Table("sentiment_data_analysis_table")  # Nimi kovakoodattuna
 
-    #Tallennetaan sortattu Comprehend data DynamoDB tauluun:
-    table = dynamodb.Table("sentiment_data_analysis_table") #Nimi kovakoodattuna
-
-    #Luodaan item/ Rivi joka tallennetaan Dynamoon:
+    # Luodaan item/ Rivi, johon poimitaan data sentimentistä tulleesta datasta ja joka tallennetaan Dynamoon:
     item = {
         "id": str(uuid.uuid4()),
-        "sentiment":sentiment,
-        "positive": positive,
-        "negative": negative,
-        "neutral": neutral,
-        "mixed":mixed,
-        "time":time
+        "sentiment": reply['Sentiment'],
+        "positive": str(reply['SentimentScore']['Positive']),
+        "negative": str(reply['SentimentScore']['Negative']),
+        "neutral": str(reply['SentimentScore']['Neutral']),
+        "mixed": str(reply['SentimentScore']['Mixed']),
+        "time": str(reply['ResponseMetadata']['HTTPHeaders']['date'])
     }
-    #Tallennus:
+    # Tallennus:
     table.put_item(Item=item)
 
-    #Luodaan Response, jonka lambda näyttää suorituksen jälkeen:
+    print(item)
+
+    # Luodaan Response, jonka lambda näyttää suorituksen jälkeen:
     response = {
         "statusCode": 200,
-        "body":json.dumps(item)}
+        "body": json.dumps(item)}
     return response

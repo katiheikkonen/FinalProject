@@ -28,9 +28,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = module.s3_moduulit.customer_reviews_s3_bucket_id
   lambda_function {
     lambda_function_arn = aws_lambda_function.analyze_with_comprehend.arn
-    events = ["s3:ObjectCreated:Post"]
-    #filter_prefix       = "AWSLogs/"
-    #filter_suffix       = ".log"
+    events = ["s3:ObjectCreated:Put"]
   }
    depends_on = [aws_lambda_permission.allow_bucket]
 }
