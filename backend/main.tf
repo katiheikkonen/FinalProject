@@ -12,9 +12,7 @@ module "lambda" {
   source = "./lambda/"
 }
 
-
-
-//module "s3" {
-//  source = "./s3/"
-//}
+module "s3" {
+  source = "./s3/"
+}
 
