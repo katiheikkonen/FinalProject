@@ -37,11 +37,12 @@ def sentimental_analysis(event, context):
 
 
     #Tallennetaan sortattu Comprehend data DynamoDB tauluun:
-    table = dynamodb.Table("sentiment_data_analysis") #Nimi kovakoodattuna
+    table = dynamodb.Table("sentiment_data_analysis_table") #Nimi kovakoodattuna
+
 
     #Luodaan item/ Rivi joka tallennetaan Dynamoon:
     item = {
-        "id":uuid.uuid4(),
+        "id": str(uuid.uuid4()),
         "sentiment":sentiment,
         "positive": positive,
         "negative": negative,

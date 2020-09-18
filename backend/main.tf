@@ -5,13 +5,13 @@ provider "aws" {
   #secret_key = ""
 }
 
-module "s3" {
-  source = "./s3/"
-}
-
-module "dynamo_db" {
-  source = "./dynamodb/"
-}
+//module "s3" {
+//  source = "./s3/"
+//}
+//
+//module "dynamo_db" {
+//  source = "./dynamodb/"
+//}
 module "lambda" {
   source = "./lambda/"
 }
