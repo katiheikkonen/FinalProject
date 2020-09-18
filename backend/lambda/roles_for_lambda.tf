@@ -10,7 +10,6 @@ resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attach
   policy_arn = aws_iam_policy.lambda_comprehend_s3_dynamo_logs.arn
 }
 
-
 resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = module.s3_moduulit.customer_reviews_s3_bucket_id
   lambda_function {
