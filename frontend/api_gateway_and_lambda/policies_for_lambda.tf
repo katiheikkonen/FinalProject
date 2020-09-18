@@ -1,7 +1,7 @@
 #Tuodaan moduuli dynamo_tables, jotta voidaan referoida politikkoihin taulun arn:
-module "s3_moduuli" {
-  source = "../../backend/s3/"
-}
+//module "s3_moduuli" {
+//  source = "../../backend/s3/"
+//}
 
 #"lambda_post_to_s3" mahdollistaa POST metodin S3 ämpäriin "customer_reviews_loppuprojekti_123" ja oikeuttaa CloudWatch logien tekemisen:
 resource "aws_iam_policy" "lambda_post_to_s3" {
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "postaa_to_s3" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:*:*:*", "${module.s3_moduuli.customer_reviews_s3_bucket_arn}/*",
-    ] #referoidaan moduulilla tuotua arnia
+    resources = ["arn:aws:logs:*:*:*", "${var.bucket_arn}/*",
+    ] #referoidaan vars arnia
   }
 }

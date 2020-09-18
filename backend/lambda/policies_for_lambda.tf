@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "analyze_getitem_putitem_logs" {
     ]
     resources = [
       "${module.s3_moduulit.customer_reviews_s3_bucket_arn}/*",
-      "${module.dynamodb_arn.dynamo_table_sentiment_analysis_data_arn}/*",
+      module.dynamodb_arn.dynamo_table_sentiment_analysis_data_arn,
       "arn:aws:logs:*:*:*",
     ]
   }

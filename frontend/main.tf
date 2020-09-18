@@ -5,9 +5,6 @@ provider "aws" {
   #secret_key = ""
 }
 
-module "api_gateway" {
+module "api_gateway_and_lambda" {
   source = "./api_gateway_and_lambda/"
 }
-#module "lambda" {
-#  source = "./lambda/"
-#}
