@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "analyze_getitem_putitem_logs" {
     ]
   }
   statement {
-    sid = "1as"
+    sid = "aos"
     effect = "Allow"
     actions = ["comprehend:DetectSentiment"
     ]

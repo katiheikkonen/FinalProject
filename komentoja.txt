@@ -1,0 +1,3 @@
+# terraform plan -out out.terraform
+# terraform apply out.terraform
+
