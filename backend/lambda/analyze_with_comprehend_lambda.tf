@@ -1,3 +1,8 @@
+#  Tuodaan SQS-jonon arn destination referoimista varten
+module "sqs_arn" {
+  source = "../sqs/"
+}
+
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "analyze_with_comprehend" {
   type = "zip"
@@ -13,6 +18,17 @@ resource "aws_lambda_function" "analyze_with_comprehend" {
   runtime = "python3.7"
   filename = data.archive_file.analyze_with_comprehend.output_path
   source_code_hash = data.archive_file.analyze_with_comprehend.output_base64sha256
+}
+
+#  Luodaan Lambdalle Destination SQS-queue, jonne menee tieto silloin kun lambdan suoritus epäonnistuu
+resource "aws_lambda_function_event_invoke_config" "lambda_destination_failure" {
+  function_name = aws_lambda_function.analyze_with_comprehend.function_name
+
+  destination_config {
+    on_failure {
+      destination = module.sqs_arn.sqs_failure_destination_arn
+    }
+  }
 }
 
 #Luodaan Lambdalle output arn
