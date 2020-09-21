@@ -5,6 +5,7 @@ resource "aws_sqs_queue" "sentimental_analysis_lambda_failure_queue" {
   message_retention_seconds = 1209600 #  viestiä säilytetään 14 päivää jonossa
   tags = {
     Owner = "Kati"
+    Project = "Loppuprojekti"
   }
 }
 

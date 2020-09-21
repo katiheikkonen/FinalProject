@@ -18,6 +18,9 @@ resource "aws_lambda_function" "analyze_with_comprehend" {
   runtime = "python3.7"
   filename = data.archive_file.analyze_with_comprehend.output_path
   source_code_hash = data.archive_file.analyze_with_comprehend.output_base64sha256
+  tags = {
+    Project = "Loppuprojekti"
+  }
 }
 
 #  Luodaan Lambdalle Destination SQS-queue, jonne menee tieto silloin kun lambdan suoritus epäonnistuu

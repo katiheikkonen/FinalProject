@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "customer_reviews_s3" {
   force_destroy = true
   tags = {
     Environment = "Dev"
-    Owner = "Mikko"
+    Project = "Loppuprojekti"
   }
 }
 

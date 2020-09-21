@@ -8,6 +8,9 @@ resource "aws_dynamodb_table" "sentiment_analysis_data" {
     name = "id"
     type = "S"
   }
+  tags = {
+    Project = "Loppuprojekti"
+  }
 }
 
 #Luodaan Output, jotta esim terraform apply komennon jälkeen saamme instanssin ip.osoitteen:

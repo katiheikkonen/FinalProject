@@ -13,6 +13,9 @@ resource "aws_lambda_function" "post_to_s3" {
   runtime = "python3.7"
   filename = data.archive_file.post_to_s3.output_path
   source_code_hash = data.archive_file.post_to_s3.output_base64sha256
+  tags = {
+    Project = "Loppuprojekti"
+  }
 }
 
 #Luodaan outputteja Lambdalle (arn, name ja invoke_arn)

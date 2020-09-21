@@ -3,6 +3,9 @@
 resource "aws_api_gateway_rest_api" "SendReviewAPI" {
   name        = "SendReviewAPI"
   description = "API for posting customer review"
+  tags = {
+    Project = "Loppuprojekti"
+  }
 }
 
 #  LUODAAN API GATEWAY RESOURCE
