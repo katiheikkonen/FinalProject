@@ -24,13 +24,15 @@ data "aws_iam_policy_document" "analyze_getitem_putitem_logs" {
       "dynamodb:PutItem",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
+      "sqs:SendMessage"
     ]
     resources = [
       "${module.s3_moduulit.customer_reviews_s3_bucket_arn}/*",
       module.s3_moduulit.customer_reviews_s3_bucket_arn,
       module.dynamodb_arn.dynamo_table_sentiment_analysis_data_arn,
       "arn:aws:logs:*:*:*",
+      module.sqs_arn.sqs_failure_destination_arn
     ]
   }
   statement {
