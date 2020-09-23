@@ -1,8 +1,8 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "comprehend" {
   type = "zip"
-  source_file = "../src/comprehend.py"
-  output_path = "../src/comprehend.zip"
+  source_file = "src/comprehend.py"
+  output_path = "src/comprehend.zip"
 }
 
 #Lambda funktio:

@@ -5,8 +5,8 @@ module "roles" {
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "post_to_dynamodb" {
   type = "zip"
-  source_file = "../src/post_to_dynamodb.py"
-  output_path = "../src/post_to_dynamodb.zip"
+  source_file = "src/post_to_dynamodb.py"
+  output_path = "src/post_to_dynamodb.zip"
 }
 
 #Lambda funktio:
