@@ -1,8 +1,8 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "get_from_s3" {
   type = "zip"
-  source_file = "../src/get_from_s3.py"
-  output_path = "../src/get_from_s3.zip"
+  source_file = "src/get_from_s3.py"
+  output_path = "src/get_from_s3.zip"
 }
 
 #Lambda funktio:
