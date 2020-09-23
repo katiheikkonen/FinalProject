@@ -54,3 +54,7 @@ resource "aws_sfn_state_machine" "sentimental_analysis_state_machine" {
     },
   })
 }
+
+output "state_machine_arn" {
+  value = aws_sfn_state_machine.sentimental_analysis_state_machine.arn
+}

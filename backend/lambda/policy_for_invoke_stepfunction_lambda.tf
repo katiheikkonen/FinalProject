@@ -1,7 +1,10 @@
-//#Tuodaan s3_moduuli referoimista varten
-//module "s3_moduulit" {
-//  source = "../s3/"
-//}
+#Tuodaan s3_moduuli referoimista varten
+module "s3_moduulit" {
+  source = "../s3/"
+}
+module "state_machine" {
+  source = "../state_machine_and_lambdas/state_machine/"
+}
 
 resource "aws_iam_policy" "lambda_invoke_stepfunction_policy" {
   name        = "lambda_invoke_stepfunction_policy"
@@ -22,7 +25,7 @@ data "aws_iam_policy_document" "lambda_invoke_stepfunction_policy_document" {
       "logs:PutLogEvents",
     ]
     resources = [
-      "arn:aws:states:eu-central-1:821383200340:stateMachine:sentimental-analysis-state-machine", # VAIHDA VIITTAUKSEEN
+      module.state_machine.state_machine_arn,
       "arn:aws:logs:*:*:*",
     ]
   }
