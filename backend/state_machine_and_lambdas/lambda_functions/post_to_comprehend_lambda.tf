@@ -16,6 +16,9 @@ resource "aws_lambda_function" "comprehend_lambda" {
   tags = {
     Project = "Loppuprojekti"
   }
+  tracing_config {
+  mode = "Active"
+  }
 }
 
 

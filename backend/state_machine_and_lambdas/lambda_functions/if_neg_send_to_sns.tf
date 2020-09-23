@@ -26,6 +26,9 @@ resource "aws_lambda_function" "if_negative_then_sns_lambda" {
       sns_topic = module.customer_service_sns.customer_service_sns_arn
     }
   }
+  tracing_config {
+  mode = "Active"
+  }
 }
 
 #Luodaan Lambdalle output arn

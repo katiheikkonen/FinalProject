@@ -27,4 +27,16 @@ data "aws_iam_policy_document" "lambda_get_from_s3_policy_document" {
       module.s3_moduulit.customer_reviews_s3_bucket_arn,
     ]
   }
+  statement {
+  sid = "adfteaetesd"
+  effect = "Allow"
+  actions = ["xray:PutTraceSegments",
+    "xray:PutTelemetryRecords",
+    "xray:GetSamplingRules",
+    "xray:GetSamplingTargets",
+    "xray:GetSamplingStatisticSummaries"
+  ]
+  resources = ["*",
+    ]
+}
 }

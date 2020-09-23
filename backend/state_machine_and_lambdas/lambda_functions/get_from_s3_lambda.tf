@@ -16,6 +16,9 @@ resource "aws_lambda_function" "get_from_s3_lambda" {
   tags = {
     Project = "Loppuprojekti"
   }
+  tracing_config {
+  mode = "Active"
+  }
 }
 
 #Luodaan Lambdalle output arn

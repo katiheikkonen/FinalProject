@@ -25,4 +25,16 @@ data "aws_iam_policy_document" "lambda_send_to_sns_document" {
       module.customer_service_sns.customer_service_sns_arn
     ]
   }
+  statement {
+  sid = "adfteaetesd"
+  effect = "Allow"
+  actions = ["xray:PutTraceSegments",
+    "xray:PutTelemetryRecords",
+    "xray:GetSamplingRules",
+    "xray:GetSamplingTargets",
+    "xray:GetSamplingStatisticSummaries"
+  ]
+  resources = ["*",
+    ]
+}
 }

@@ -4,10 +4,7 @@ provider "aws" {
 
 }
 
-module "lambda" {
-  source = "./lambda/"
-}
 module "state_machine" {
-  source = "./state_machine_and_lambdas/"
+  source = "./state_machine_and_lambdas/state_machine/"
 }
 

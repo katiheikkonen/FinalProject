@@ -1,9 +1,6 @@
-#Tuodaan s3_moduuli referoimista varten
-module "s3_moduulit" {
-  source = "../s3/"
-}
+
 resource "aws_iam_role" "role_for_invoke_stepfunction_lambda" {
-  name = "iam_for_invoke_stepfunction_lambda"
+  name = "iam_for_invoke_stepfunction_lambda_ver2"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -21,7 +18,7 @@ resource "aws_iam_role" "role_for_invoke_stepfunction_lambda" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_invoke_step_function_attachment" {
   role       = aws_iam_role.role_for_invoke_stepfunction_lambda.name
   policy_arn = aws_iam_policy.lambda_invoke_stepfunction_policy.arn
 }

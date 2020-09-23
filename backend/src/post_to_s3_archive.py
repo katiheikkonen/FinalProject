@@ -1,14 +1,13 @@
 import boto3
 import uuid
 import json
-import os
-bucket_name = os.getenv("bucket_name")
 
 s3 = boto3.resource("s3")
 
 #Funktion tarkoitus on arkistoida asiakaspalautteet S3 ämpäriin myöhempää käyttöä varten
 def archive_to_s3_bucket(event, context):
     data = json.loads(event['body'])
+    bucket_name = 'archival-loppuprojekti'
 
     #Nimentään .json tiedosto randomoidulla uu ID.llä
     tiedosto = str(uuid.uuid1())

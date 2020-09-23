@@ -16,6 +16,9 @@ resource "aws_lambda_function" "invoke_stepfunction" {
   tags = {
     Project = "Loppuprojekti"
   }
+  tracing_config {
+  mode = "Active"
+  }
 }
 
 #Luodaan Lambdalle output arn

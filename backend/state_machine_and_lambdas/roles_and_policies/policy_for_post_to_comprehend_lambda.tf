@@ -26,4 +26,16 @@ data "aws_iam_policy_document" "lambda_post_to_comprehend_document" {
     resources = ["*",
       ]
   }
+  statement {
+  sid = "adfteaetesd"
+  effect = "Allow"
+  actions = ["xray:PutTraceSegments",
+    "xray:PutTelemetryRecords",
+    "xray:GetSamplingRules",
+    "xray:GetSamplingTargets",
+    "xray:GetSamplingStatisticSummaries"
+  ]
+  resources = ["*",
+    ]
+}
 }

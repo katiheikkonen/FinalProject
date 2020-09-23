@@ -20,6 +20,9 @@ resource "aws_lambda_function" "post_to_dynamodb" {
   tags = {
     Project = "Loppuprojekti"
   }
+  tracing_config {
+  mode = "Active"
+  }
 }
 
 
