@@ -7,7 +7,7 @@ import boto3
 s3 = boto3.resource('s3')
 
 def get_object_from_s3(event, context):
-    message = "What a wonderful product. I'm super happy!"
+    message = "TERRIBLE! I hate this piece of shit. The worst product I have ever bought! I will make sure you guys go out of business soon!!!"
     return {"body": json.dumps(message)}
 
 

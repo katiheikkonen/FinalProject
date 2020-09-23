@@ -10,6 +10,8 @@ table = dynamodb.Table("sentiment_data_analysis_table")  # Nimi kovakoodattuna
 def post_to_dynamo(event, context):
     data = json.loads(event[1]['body'])  # poimitaan comprehend funktiosta tuleva data
     analysis_data = data['analysis'] #poimitaan analyysi kyseisestä datasta
+    message = data['message'] #pomitaan viesti talteen
+
 
     # Luodaan item/ Rivi, johon poimitaan data sentimentistä tulleesta datasta ja joka tallennetaan Dynamoon:
     item = {
@@ -21,11 +23,18 @@ def post_to_dynamo(event, context):
         "mixed": str(analysis_data['SentimentScore']['Mixed']),
         "time": str(analysis_data['ResponseMetadata']['HTTPHeaders']['date'])
     }
+
+
     # # Tallennus:
     table.put_item(Item=item)
+
+
+    #kootaan viestistä ja negatiivisesta sentimentistä palautus, joka lähetetään seuraavaan lambdaan:
+    jatkoon = {'message': message,
+               'negative_sentiment': analysis_data['SentimentScore']['Negative']}
 
     # Luodaan Response, jonka lambda näyttää suorituksen jälkeen:
     response = {
         "statusCode": 200,
-        "body": json.dumps(item)}
+        "body": json.dumps(jatkoon)}
     return response

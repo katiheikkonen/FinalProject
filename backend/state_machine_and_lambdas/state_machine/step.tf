@@ -49,6 +49,11 @@ resource "aws_sfn_state_machine" "sentimental_analysis_state_machine" {
       "PutToDynamoAndSNS": {
         "Type": "Task",
         "Resource": module.lambda_functions.dynamodb_arn,
+        "Next": "PostToSNS"
+      }
+      "PostToSNS": {
+        "Type": "Task",
+        "Resource": module.lambda_functions.if_neg_then_sns_arn,
         "End": true
       }
     },

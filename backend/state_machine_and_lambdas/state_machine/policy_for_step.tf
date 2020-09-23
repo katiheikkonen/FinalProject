@@ -19,6 +19,7 @@ data "aws_iam_policy_document" "state_machine_policy_document" {
       module.lambda_functions.dynamodb_arn,
       module.lambda_functions.get_from_s3_arn,
       module.lambda_functions.post_to_s3_archive_arn,
+      module.lambda_functions.if_neg_then_sns_arn,
     ]
   }
 }

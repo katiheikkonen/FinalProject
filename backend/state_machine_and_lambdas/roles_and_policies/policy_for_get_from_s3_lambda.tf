@@ -1,15 +1,13 @@
+#Tuodaan s3_moduuli referoimista varten
+module "s3_moduulit" {
+  source = "../../s3/"
+}
+
 resource "aws_iam_policy" "lambda_get_from_s3_policy_test" {
   name        = "lambda_get_from_s3_policy_test"
   description = "IPSUS LAPSUS"
   path   = "/"
   policy = data.aws_iam_policy_document.lambda_get_from_s3_policy_document.json
-}
-#Tuodaan s3_moduuli referoimista varten
-module "s3_moduulit" {
-  source = "../../s3/"
-}
-module "dynamodb_arn" {
-  source = "../../dynamodb/"
 }
 
 #Policy document ylempää POST metodia varten:
