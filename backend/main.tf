@@ -12,8 +12,11 @@ provider "aws" {
 //module "dynamo_db" {
 //  source = "./dynamodb/"
 //}
-module "lambda" {
-  source = "./lambda/"
+//module "lambda" {
+//  source = "./lambda/"
+//}
+module "state_machine" {
+  source = "./state_machine_and_lambdas/state_machine/"
 }
 
 
