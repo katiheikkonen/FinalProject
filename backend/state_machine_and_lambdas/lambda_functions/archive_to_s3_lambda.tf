@@ -1,3 +1,7 @@
+module "s3" {
+  source = "../../s3/"
+}
+
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "post_to_s3_archive" {
   type = "zip"
@@ -12,9 +16,14 @@ resource "aws_lambda_function" "post_to_s3_archive_lambda" {
   role = module.roles.anr_for_archive_to_s3_role
   runtime = "python3.7"
   filename = data.archive_file.post_to_s3_archive.output_path
-  source_code_hash = data.archive_file.post_to_s3_archive.output_base64sha256
+  source_code_hash = "${data.archive_file.post_to_s3_archive.output_base64sha256}-${module.roles.anr_for_archive_to_s3_role}"
   tags = {
     Project = "Loppuprojekti"
+  }
+  environment {
+    variables = {
+      bucket_name = module.s3.archival_s3_bucket_id
+    }
   }
 }
 

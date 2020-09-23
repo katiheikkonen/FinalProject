@@ -1,4 +1,7 @@
-
+#Tuodaan s3_moduuli referoimista varten
+module "s3_moduulit" {
+  source = "../s3/"
+}
 resource "aws_iam_role" "role_for_invoke_stepfunction_lambda" {
   name = "iam_for_invoke_stepfunction_lambda"
   assume_role_policy = <<EOF

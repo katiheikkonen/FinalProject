@@ -1,6 +1,6 @@
 
-resource "aws_s3_bucket" "customer_reviews_s3" {
-  bucket = var.s3_bucket_name
+resource "aws_s3_bucket" "customer_review_s3" {
+  bucket = var.s3_bucket_name_customer_review
   force_destroy = true
   tags = {
     Environment = "Dev"
@@ -9,9 +9,9 @@ resource "aws_s3_bucket" "customer_reviews_s3" {
 }
 
 output "customer_reviews_s3_bucket_arn" {
-  value = aws_s3_bucket.customer_reviews_s3.arn
+  value = aws_s3_bucket.customer_review_s3.arn
 }
 
 output "customer_reviews_s3_bucket_id" {
-  value = aws_s3_bucket.customer_reviews_s3.id
+  value = aws_s3_bucket.customer_review_s3.id
 }

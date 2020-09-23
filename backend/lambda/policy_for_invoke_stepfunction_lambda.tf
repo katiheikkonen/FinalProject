@@ -1,7 +1,3 @@
-#Tuodaan s3_moduuli referoimista varten
-module "s3_moduulit" {
-  source = "../s3/"
-}
 module "state_machine" {
   source = "../state_machine_and_lambdas/state_machine/"
 }

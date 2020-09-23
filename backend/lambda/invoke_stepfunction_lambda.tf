@@ -9,7 +9,7 @@ data "archive_file" "invoke_stepfunction" {
 resource "aws_lambda_function" "invoke_stepfunction" {
   function_name = "invoke_stepfunction"
   handler = "invoke_stepfunction.invoke_stepfunction"
-  role = aws_iam_role.role_for_invoke_stepfunction_lambda.arn  #  VAIHDA VIELÄ
+  role = aws_iam_role.role_for_invoke_stepfunction_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.invoke_stepfunction.output_path
   source_code_hash = data.archive_file.invoke_stepfunction.output_base64sha256
