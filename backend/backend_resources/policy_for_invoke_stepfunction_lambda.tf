@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "lambda_invoke_stepfunction_policy_document" {
       "logs:PutLogEvents",
     ]
     resources = [
-      "arn:aws:states:eu-central-1:821383200340:stateMachine:sentimental-analysis-state-machine",
+      aws_sfn_state_machine.sentimental_analysis_state_machine.arn,
       "arn:aws:logs:*:*:*",
     ]
   }

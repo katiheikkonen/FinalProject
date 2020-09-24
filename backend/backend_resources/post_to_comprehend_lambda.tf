@@ -9,7 +9,7 @@ data "archive_file" "comprehend" {
 resource "aws_lambda_function" "comprehend_lambda" {
   function_name = "comprehend_lambda"
   handler = "comprehend.sentimental_analysis"
-  role = module.roles.anr_for_post_to_comprehend_role
+  role = aws_iam_role.role_for_post_to_comprehend_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.comprehend.output_path
   source_code_hash = data.archive_file.comprehend.output_base64sha256

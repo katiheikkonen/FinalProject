@@ -10,10 +10,10 @@ data "archive_file" "post_to_s3_archive" {
 resource "aws_lambda_function" "post_to_s3_archive_lambda" {
   function_name = "post_to_s3_archive"
   handler = "post_to_s3_archive.archive_to_s3_bucket"
-  role = module.roles.anr_for_archive_to_s3_role
+  role = aws_iam_role.role_for_archive_to_s3_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.post_to_s3_archive.output_path
-  source_code_hash = "${data.archive_file.post_to_s3_archive.output_base64sha256}-${module.roles.anr_for_archive_to_s3_role}"
+  source_code_hash = "${data.archive_file.post_to_s3_archive.output_base64sha256}-${aws_iam_role.role_for_archive_to_s3_lambda.arn}"
   tags = {
     Project = "Loppuprojekti"
   }

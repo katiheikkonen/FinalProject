@@ -15,11 +15,11 @@ data "aws_iam_policy_document" "state_machine_policy_document" {
       "lambda:InvokeFunction"
     ]
     resources = [
-      module.lambda_functions.comprehend_arn,
-      module.lambda_functions.dynamodb_arn,
-      module.lambda_functions.get_from_s3_arn,
-      module.lambda_functions.post_to_s3_archive_arn,
-      module.lambda_functions.if_neg_then_sns_arn,
+      aws_lambda_function.comprehend_lambda.arn,
+      aws_lambda_function.post_to_dynamodb.arn,
+      aws_lambda_function.get_from_s3_lambda.arn,
+      aws_lambda_function.post_to_s3_archive_lambda.arn,
+      aws_lambda_function.if_negative_then_sns_lambda.arn
     ]
   }
 }

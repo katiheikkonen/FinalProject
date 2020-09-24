@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "lambda_post_to_dynamodb_document" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = [module.dynamodb_arn.dynamo_table_sentiment_analysis_data_arn,
+    resources = [aws_dynamodb_table.sentiment_analysis_data.arn,
       "arn:aws:logs:*:*:*"
     ]
   }

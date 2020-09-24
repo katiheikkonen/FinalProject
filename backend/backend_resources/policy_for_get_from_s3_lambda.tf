@@ -1,8 +1,3 @@
-#Tuodaan s3_moduuli referoimista varten
-module "s3_moduulit" {
-  source = "s3"
-}
-
 resource "aws_iam_policy" "lambda_get_from_s3_policy_test" {
   name        = "lambda_get_from_s3_policy_test"
   description = "IPSUS LAPSUS"
@@ -23,8 +18,8 @@ data "aws_iam_policy_document" "lambda_get_from_s3_policy_document" {
       "logs:PutLogEvents"
     ]
     resources = ["arn:aws:logs:*:*:*",
-      "${module.s3_moduulit.customer_reviews_s3_bucket_arn}/*",
-      module.s3_moduulit.customer_reviews_s3_bucket_arn,
+      "${aws_s3_bucket.customer_review_s3.arn}/*",
+      aws_s3_bucket.customer_review_s3.arn
     ]
   }
   statement {
