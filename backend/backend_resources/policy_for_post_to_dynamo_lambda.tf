@@ -1,5 +1,3 @@
-
-
 resource "aws_iam_policy" "lambda_post_to_dynamodb_policy_test" {
   name        = "lambda_post_to_dynamodb_policy_test_ver2"
   description = "IPSUS LAPSUS"
