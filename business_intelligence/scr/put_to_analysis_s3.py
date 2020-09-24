@@ -15,15 +15,23 @@ def put_to_analysis_s3(event, context):
     bucket_name = 'analysis-loppuprojekti'
 
     # Haetaan tiedoston nimeksi tiedoston id ja lisätään pääte json
-    tiedosto = data['dynamodb']['Keys']['id']['S']
-    file_name = f"{tiedosto}.json"
+    id = data['dynamodb']['Keys']['id']['S']
+    file_name = f"{id}.json"
     s3_path = file_name
 
     #  Parsitaan eventistä halutut tiedot analyysiä varten
-    values = data['dynamodb]['NewImage']
+    sentiment_data = data['dynamodb']['NewImage']
+    sentiment = sentiment_data["sentiment"]['S']
+    negative = sentiment_data['negative']['S']
+    positive = sentiment_data['positive']['S']
+    neutral = sentiment_data['neutral']['S']
+    mixed = sentiment_data['mixed']['S']
+    time = sentiment_data['time']['S']
+
+    body = (f'{"sentiment": "{sentiment}", "negative": "{negative}, "positive": "{positive}", "neutral": "{neutral}", "mixed":"{mixed}", "time": "{time}"}')
 
     # Laitetaan DynamoDB:n taulun tiedot tiedosto S3 bucketiin:
-    s3.Bucket(bucket_name).put_object(Key=s3_path, Body=json.dumps(data))
+    s3.Bucket(bucket_name).put_object(Key=s3_path, Body=body)
 
     # Palautetaan statuskoodi ja tiedoston nimi
     response = {
