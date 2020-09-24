@@ -22,3 +22,7 @@ output "dynamo_table_sentiment_analysis_data_arn" {
 output "dynamo_table_sentiment_analysis_data_name" {
   value = aws_dynamodb_table.sentiment_analysis_data.name
 }
+
+output "dynamo_table_sentiment_analysis_data_stream_arn" {
+  value = aws_dynamodb_table.sentiment_analysis_data.stream_arn
+}
