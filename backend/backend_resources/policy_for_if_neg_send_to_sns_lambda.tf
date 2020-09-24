@@ -1,7 +1,3 @@
-module "customer_service_sns" {
-  source = "../../sns/"
-}
-
 #Policy joka oikeuttaa lambdaa lähettämään SNS topikkiin viestiä
 resource "aws_iam_policy" "lambda_send_to_sns_policy" {
   name        = "lambda_send_to_sns_policy"

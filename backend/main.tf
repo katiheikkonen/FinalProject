@@ -4,7 +4,7 @@ provider "aws" {
 
 }
 
-module "state_machine" {
-  source = "./state_machine_and_lambdas/state_machine/"
+module "backend" {
+  source = "./backend_resources/"
 }
 

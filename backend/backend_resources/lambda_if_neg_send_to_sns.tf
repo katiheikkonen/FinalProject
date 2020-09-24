@@ -12,7 +12,7 @@ resource "aws_lambda_function" "if_negative_then_sns_lambda" {
   role = aws_iam_role.role_for_send_to_sns_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.if_negative_then_sns.output_path
-  source_code_hash = "${data.archive_file.if_negative_then_sns.output_base64sha256}-${aws_iam_role.role_for_send_to_sns_lambda}"
+  source_code_hash = "${data.archive_file.if_negative_then_sns.output_base64sha256}-${aws_iam_role.role_for_send_to_sns_lambda.arn}"
   tags = {
     Project = "Loppuprojekti"
   }
