@@ -2,7 +2,7 @@
     "fileLocations": [
         {
             "URIPrefixes": [
-                "https://s3-eu-central-1.amazonaws.com/testi-customer-review/"
+                "https://s3-eu-central-1.amazonaws.com/analysis-loppuprojekti/"
             ]
         }
     ],
