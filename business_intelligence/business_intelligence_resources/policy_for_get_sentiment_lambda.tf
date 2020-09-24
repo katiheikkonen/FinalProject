@@ -5,7 +5,7 @@ resource "aws_iam_policy" "lambda_get_sentiment_policy" {
   policy = data.aws_iam_policy_document.get_sentiment_policy_doc.json
 }
 
-#Policy document ylempää POST metodia varten:
+#Policy document ylempää GET metodia varten:
 data "aws_iam_policy_document" "get_sentiment_policy_doc" {
   statement {
     sid = "iae"
