@@ -15,7 +15,7 @@ def post_to_dynamo(event, context):
 
     # Luodaan item/ Rivi, johon poimitaan data sentimentistä tulleesta datasta ja joka tallennetaan Dynamoon:
     item = {
-        "id": str(uuid.uuid4()),
+        "id": data['id'],
         "sentiment": analysis_data['Sentiment'],
         "positive": str(analysis_data['SentimentScore']['Positive']),
         "negative": str(analysis_data['SentimentScore']['Negative']),

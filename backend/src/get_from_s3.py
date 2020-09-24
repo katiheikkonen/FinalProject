@@ -14,8 +14,13 @@ def get_object_from_s3(event, context):
      obj = s3.Object(s3_bucket_name, s3_filename)
      # tiedoston sisältä
      m_body = obj.get()['Body']._raw_stream.readline()
-     viesti = json.loads(m_body)
+
+     data = json.loads(m_body)
+
+     # tapahtuman aikaa käytetään IDnä databaseen ja arkistoon
+     aika = s3_trigger[0]['eventTime']
+     viesti = {"message": data['message'], "email": data['email'], "id": aika}
 
      return {
-         "body": json.dumps(viesti['message'])
+          "body": json.dumps(viesti)
      }
