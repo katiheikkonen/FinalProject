@@ -1,9 +1,8 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "testi_func" {
   type = "zip"
-  source_file = "scr/func.py"
-
-  output_path = "scr/func.zip"
+  source_file = "scr/get_sentiment.py"
+  output_path = "scr/get_sentiment.zip"
 }
 
 #Lambda funktio:

@@ -4,7 +4,7 @@ import uuid
 import boto3
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table("sentiment_data_analysis_table")  # Nimi kovakoodattuna
+table = dynamodb.Table("sentiment_data_analysis_global_table")  # Nimi kovakoodattuna
 
 
 def post_to_dynamo(event, context):

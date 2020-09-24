@@ -1,5 +1,5 @@
 variable "dynamodb_table_name" {
-  default = "sentiment_data_analysis_table"
+  default = "sentiment_data_analysis_global_table"
 }
 
 variable "s3_bucket_name_customer_review" {
