@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "lambda_invoke_step_function_attachmen
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = module.s3_moduulit.customer_reviews_s3_bucket_id
+  bucket = aws_s3_bucket.customer_review_s3.id
   lambda_function {
     lambda_function_arn = aws_lambda_function.invoke_stepfunction.arn
     events = ["s3:ObjectCreated:Put"]
@@ -37,5 +37,5 @@ resource "aws_lambda_permission" "allow_bucket" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.invoke_stepfunction.arn
   principal     = "s3.amazonaws.com"
-  source_arn    = module.s3_moduulit.customer_reviews_s3_bucket_arn
+  source_arn    = aws_s3_bucket.customer_review_s3.arn
 }

@@ -1,6 +1,3 @@
-module "roles" {
-  source = "state_machine_and_lambdas\/roles_and_policies"
-}
 
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
 data "archive_file" "post_to_dynamodb" {
@@ -13,7 +10,7 @@ data "archive_file" "post_to_dynamodb" {
 resource "aws_lambda_function" "post_to_dynamodb" {
   function_name = "post_dynamodb"
   handler = "post_to_dynamodb.post_to_dynamo"
-  role = module.roles.anr_for_post_to_dynamo_role
+  role = aws_iam_role.role_for_post_to_dynamodb_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.post_to_dynamodb.output_path
   source_code_hash = data.archive_file.post_to_dynamodb.output_base64sha256
