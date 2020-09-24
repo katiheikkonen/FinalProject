@@ -1,6 +1,6 @@
 #Tuodaan s3_moduuli referoimista varten
 module "s3_moduulit" {
-  source = "../../s3/"
+  source = "s3"
 }
 
 resource "aws_iam_policy" "lambda_get_from_s3_policy_test" {
