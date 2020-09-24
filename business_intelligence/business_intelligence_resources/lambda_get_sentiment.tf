@@ -1,8 +1,4 @@
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:
-module "lambda_rooli" {
-  source = "../roles_and_policies/"
-}
-
 data "archive_file" "testi_func" {
   type = "zip"
   source_file = "scr/func.py"
@@ -14,10 +10,10 @@ data "archive_file" "testi_func" {
 resource "aws_lambda_function" "get_averages" {
   function_name = "get_averages_business_intelligence"
   handler = "func.get_sentiment"
-  role = module.lambda_rooli.lambda_role_arn
+  role = aws_iam_role.iam_get_sentiment_lambda.arn
   runtime = "python3.7"
   filename = data.archive_file.testi_func.output_path
-  source_code_hash = "${data.archive_file.testi_func.output_base64sha256}-${module.lambda_rooli.lambda_role_name}"
+  source_code_hash = "${data.archive_file.testi_func.output_base64sha256}-${aws_iam_role.iam_get_sentiment_lambda.arn}"
   environment {
     variables = {
       table = var.environmental_table_name

@@ -18,6 +18,7 @@ resource "aws_iam_role" "iam_get_sentiment_lambda" {
 EOF
 }
 
+#Yhdistetään resurssi ja rooli toisiinsa
 resource "aws_iam_role_policy_attachment" "lambda_analyze_with_comprehend_attachment" {
   role       = aws_iam_role.iam_get_sentiment_lambda.name
   policy_arn = aws_iam_policy.lambda_get_sentiment_policy.arn

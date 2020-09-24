@@ -1,6 +1,3 @@
-module "dynamodb_arn" {
-  source = "dynamodb"
-}
 
 
 resource "aws_iam_policy" "lambda_post_to_dynamodb_policy_test" {
