@@ -14,9 +14,13 @@ def put_to_analysis_s3(event, context):
     #  Määritellään bucket, johon tiedot halutaan tallentaa
     bucket_name = 'analysis-loppuprojekti'
 
-    tiedosto = data['dynamodb']['Keys']['id']['S']  # haetaan tiedoston nimeksi tiedoston id
+    # Haetaan tiedoston nimeksi tiedoston id ja lisätään pääte json
+    tiedosto = data['dynamodb']['Keys']['id']['S']
     file_name = f"{tiedosto}.json"
     s3_path = file_name
+
+    #  Parsitaan eventistä halutut tiedot analyysiä varten
+    values = data['dynamodb]['NewImage']
 
     # Laitetaan DynamoDB:n taulun tiedot tiedosto S3 bucketiin:
     s3.Bucket(bucket_name).put_object(Key=s3_path, Body=json.dumps(data))
