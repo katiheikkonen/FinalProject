@@ -1,7 +1,7 @@
 #  Luodaan State Machine ja sen vaiheet
 
 module "lambda_functions" {
-  source = "../lambda_functions/"
+  source = "state_machine_and_lambdas\/lambda_functions"
 }
 
 

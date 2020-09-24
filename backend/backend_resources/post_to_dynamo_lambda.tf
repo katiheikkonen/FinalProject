@@ -1,5 +1,5 @@
 module "roles" {
-  source = "../roles_and_policies/"
+  source = "state_machine_and_lambdas\/roles_and_policies"
 }
 
 #Muutetaan lambdan suorittama .py tiedosto .zip muotoon ja archievetaan se:

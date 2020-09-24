@@ -1,5 +1,5 @@
 module "dynamodb_arn" {
-  source = "../../dynamodb/"
+  source = "dynamodb"
 }
 
 
