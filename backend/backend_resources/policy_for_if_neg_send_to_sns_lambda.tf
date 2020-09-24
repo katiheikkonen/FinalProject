@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "lambda_send_to_sns_document" {
       "logs:PutLogEvents"
     ]
     resources = ["arn:aws:logs:*:*:*",
-      module.customer_service_sns.customer_service_sns_arn
+      aws_sns_topic.customer_service_negative_review.arn
     ]
   }
   statement {

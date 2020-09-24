@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "lambda_archive_to_s3_policy_policy_document" {
       "logs:PutLogEvents"
     ]
     resources = ["arn:aws:logs:*:*:*",
-      "${module.s3_moduulit.archival_s3_bucket_arn}/*"
+      "${aws_s3_bucket.archival_s3.arn}/*"
     ]
   }
   statement {
