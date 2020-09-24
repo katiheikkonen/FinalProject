@@ -10,7 +10,7 @@ def archive_to_s3_bucket(event, context):
     bucket_name = 'archival-loppuprojekti'
 
     #Nimentään .json tiedosto randomoidulla uu ID.llä
-    tiedosto = str(uuid.uuid1())
+    tiedosto = data['id']
     file_name = f"{tiedosto}.json"
     s3_path = file_name
 

@@ -5,10 +5,7 @@ import uuid
 #  Lambda lähettää saadun palautteen Amazon Comprehendille analysoitavaksi Sentimental Analysis-työkalun kautta
 import boto3
 
-# s3 = boto3.client("s3")
 comprehend = boto3.client("comprehend")
-#dynamodb = boto3.resource('dynamodb')
-#s3 = boto3.resource('s3')
 
 
 def sentimental_analysis(event, context):
@@ -16,14 +13,16 @@ def sentimental_analysis(event, context):
     data = json.loads(event['body'])
 
     # Extracting sentiments using comprehend
-    reply = comprehend.detect_sentiment(Text=data, LanguageCode="en")
+    reply = comprehend.detect_sentiment(Text=data['message'], LanguageCode="en")
 
     # + potentiaalista debugausta varten retry-attemps kenttä:
     retry_attemps = reply['ResponseMetadata']['RetryAttempts']
 
-    koottu_vastaus = {"message":data,
-                      "analysis": reply}
-
+    koottu_vastaus = {"message": data['message'],
+                    "analysis": reply,
+                    "id":data['id'],
+                    "email":data['email']
+                    }
 
     # Luodaan Response, jonka lambda näyttää suorituksen jälkeen:
     response = {
