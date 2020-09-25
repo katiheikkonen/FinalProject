@@ -19,16 +19,30 @@ def put_to_analysis_s3(event, context):
     file_name = f"{id}.json"
     s3_path = file_name
 
-    #  Parsitaan eventistä halutut tiedot analyysiä varten
     sentiment_data = data['dynamodb']['NewImage']
+
+    #  Parsitaan eventistä halutut tiedot analyysiä varten
+
     sentiment = sentiment_data["sentiment"]['S']
-    negative = sentiment_data['negative']['S']
-    positive = sentiment_data['positive']['S']
-    neutral = sentiment_data['neutral']['S']
-    mixed = sentiment_data['mixed']['S']
+    negative = float(sentiment_data['negative']['S'])
+    positive = float(sentiment_data['positive']['S'])
+    neutral = float(sentiment_data['neutral']['S'])
+    mixed = float(sentiment_data['mixed']['S'])
     time = sentiment_data['time']['S']
 
-    body = (f'{"sentiment": "{sentiment}", "negative": "{negative}, "positive": "{positive}", "neutral": "{neutral}", "mixed":"{mixed}", "time": "{time}"}')
+    if does_it_matter(negative):
+        positive = 0
+
+    if does_it_matter(positive):
+        positive = 0
+
+    if does_it_matter(neutral):
+        positive = 0
+
+    if does_it_matter(mixed):
+        positive = 0
+
+    body = f'{{"sentiment": "{sentiment}", "negative": "{negative}", "positive": "{positive}", "neutral": "{neutral}", "mixed":"{mixed}", "time": "{time}"}}'
 
     # Laitetaan DynamoDB:n taulun tiedot tiedosto S3 bucketiin:
     s3.Bucket(bucket_name).put_object(Key=s3_path, Body=body)
@@ -39,3 +53,7 @@ def put_to_analysis_s3(event, context):
         'body': json.dumps('file is created in: ' + bucket_name + "/" + s3_path)
     }
     return response
+
+def does_it_matter(x):
+    if x < 0.0001:
+        return True
